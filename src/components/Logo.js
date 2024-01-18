@@ -1,15 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// styles
-import "./Logo.css";
+// images
+import logo from "../images/logo.png";
 
 const Logo = () => {
   return (
     <Link className="logo" to="/">
-      <span className="logo-firstWord">Muscle</span>
-      <br />
-      <span className="logo-secondWord">Mate</span>
+      <img src={logo} alt="logo" />
     </Link>
   );
 };

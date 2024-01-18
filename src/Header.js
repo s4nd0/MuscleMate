@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLogout } from "./hooks/useLogout";
+import { useAuthContext } from "./hooks/useAuthContext";
 
 // components
 import Logo from "./components/Logo";
@@ -17,12 +19,15 @@ const Header = () => {
   ];
   const date = new Date().getDate();
 
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
+
   return (
     <header>
       <Logo />
       <nav>
         <ul>
-          {!false && (
+          {!user && (
             <>
               <li className="btn">
                 <Link to="/login">Login</Link>
@@ -32,7 +37,7 @@ const Header = () => {
               </li>
             </>
           )}
-          {false && (
+          {user && (
             <>
               <li>
                 {week[dayOfTheWeek]}, {date}
@@ -45,7 +50,9 @@ const Header = () => {
                   : "th"}
               </li>
               <li>
-                <button className="btn">Logout</button>
+                <button onClick={logout} className="btn">
+                  Logout
+                </button>
               </li>
             </>
           )}

@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext";
 
 // pages
 import Home from "./pages/Home";
@@ -13,28 +14,32 @@ import Header from "./Header";
 import "./App.css";
 
 function App() {
+  const { user, authIsReady } = useAuthContext();
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header />
-        <main>
-          <Routes>
-            <Route
-              path="/"
-              element={false ? <Navigate to="/login" /> : <Home />}
-            />
-            <Route
-              path="/login"
-              element={true ? <Navigate to="/" /> : <Login />}
-            />
-            <Route
-              path="/signup"
-              element={true ? <Navigate to="/" /> : <Signup />}
-            />
-          </Routes>
-        </main>
-        <Footer />
-      </BrowserRouter>
+      {authIsReady && (
+        <BrowserRouter>
+          <Header />
+          <main>
+            <Routes>
+              <Route
+                path="/"
+                element={!user ? <Navigate to="/login" /> : <Home />}
+              />
+              <Route
+                path="/login"
+                element={user ? <Navigate to="/" /> : <Login />}
+              />
+              <Route
+                path="/signup"
+                element={user ? <Navigate to="/" /> : <Signup />}
+              />
+            </Routes>
+          </main>
+          <Footer />
+        </BrowserRouter>
+      )}
     </div>
   );
 }
