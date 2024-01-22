@@ -1,0 +1,32 @@
+.PlanWindow {
+  font-family: "Oswald", sans-serif;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid #333;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.planWindow-header {
+  background-color: var(--primary);
+  color: var(--secondary);
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-weight: 500;
+}
+.planWindow-content {
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.planWindow-content ul {
+  margin: 0;
+}
+.planWindow-btn {
+  margin: 0 20px 20px;
+}
