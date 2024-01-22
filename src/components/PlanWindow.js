@@ -45,11 +45,33 @@ const PlanWindow = () => {
 
   const day = new Date().getDay() - 1;
 
+  const week = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  const today = week[day];
+
   return (
     <div className="PlanWindow">
+      {plan[day].name !== "Rest Day" && (
+        <>
+          <div className="planWindow-header today">
+            <p>Today!</p>
+            <p>{plan[day].name}</p>
+          </div>
+          <Link to="/training" className="planWindow-btn btn">
+            Start training!
+          </Link>
+        </>
+      )}
+
       <div className="planWindow-header">
-        <p>Today:</p>
-        <p>{plan[day].name}</p>
+        <p>{today}</p>
       </div>
       <div className="planWindow-content">
         {plan[day].exercises && (
@@ -74,9 +96,16 @@ const PlanWindow = () => {
           </p>
         )}
       </div>
-      <Link to="/plan" className="planWindow-btn btn">
-        Show full plan
-      </Link>
+      {plan[day].name !== "Rest Day" && (
+        <Link to="/plan" className="planWindow-btn btn">
+          View full plan
+        </Link>
+      )}
+      {plan[day].name === "Rest Day" && (
+        <Link to="/restday" className="planWindow-btn btn">
+          More about rest day
+        </Link>
+      )}
     </div>
   );
 };

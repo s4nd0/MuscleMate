@@ -1,7 +1,7 @@
 import React from "react";
 
 // styles
-import "./PlanDayTemplate.css";
+import "./PlanWindow.css";
 import { Link } from "react-router-dom";
 
 const PlanDayTemplate = ({ item }) => {
@@ -19,19 +19,19 @@ const PlanDayTemplate = ({ item }) => {
 
   return (
     <>
-      <div className="plan-template">
+      <div className="PlanWindow">
         <div
           className={
             today === week[item.id]
-              ? "plan-template-header today"
-              : "plan-template-header"
+              ? "planWindow-header today"
+              : "planWindow-header"
           }
         >
           <p>{today === week[item.id] ? "Today!" : week[item.id]}</p>
           <p>{item.name}</p>
         </div>
         {item.exercises && (
-          <div className="plan-template-content">
+          <div className="planWindow-content">
             <b>
               <p>Exercise</p>
             </b>
@@ -43,25 +43,25 @@ const PlanDayTemplate = ({ item }) => {
             </b>
           </div>
         )}
-        <div className="plan-template-content">
+        <div className="planWindow-content">
           {item.exercises && (
-            <ul className="plan-template-content-names">
+            <ul className="planWindow-content-names">
               {item.exercises.map((exercise) => (
-                <li>{exercise}</li>
+                <li key={Math.random()}>{exercise}</li>
               ))}
             </ul>
           )}
           {item.sets && (
             <ul>
               {item.sets.map((set) => (
-                <li>{set}</li>
+                <li key={Math.random()}>{set}</li>
               ))}
             </ul>
           )}
           {item.reps && (
             <ul>
               {item.reps.map((rep) => (
-                <li>{rep}</li>
+                <li key={Math.random()}>{rep}</li>
               ))}
             </ul>
           )}
@@ -74,12 +74,12 @@ const PlanDayTemplate = ({ item }) => {
           )}
         </div>
         {today === week[item.id] && item.exercises && (
-          <Link to="/training" className="plan-template-column-btn btn">
+          <Link to="/training" className="planWindow-btn btn">
             Start training!
           </Link>
         )}
         {today === week[item.id] && item.name === "Rest Day" && (
-          <Link to="/restday" className="plan-template-column-btn btn">
+          <Link to="/restday" className="planWindow-btn btn">
             more about rest day
           </Link>
         )}

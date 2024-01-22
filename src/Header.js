@@ -7,18 +7,6 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import Logo from "./components/Logo";
 
 const Header = () => {
-  const dayOfTheWeek = new Date().getDay() - 1;
-  const week = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-  const date = new Date().getDate();
-
   const { logout } = useLogout();
   const { user } = useAuthContext();
 
@@ -38,23 +26,11 @@ const Header = () => {
             </>
           )}
           {user && (
-            <>
-              <li>
-                {week[dayOfTheWeek]}, {date}
-                {date === 1
-                  ? "st"
-                  : date === 2
-                  ? "nd"
-                  : date === 3
-                  ? "rd"
-                  : "th"}
-              </li>
-              <li>
-                <button onClick={logout} className="btn">
-                  Logout
-                </button>
-              </li>
-            </>
+            <li>
+              <button onClick={logout} className="btn">
+                Logout
+              </button>
+            </li>
           )}
         </ul>
       </nav>

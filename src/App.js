@@ -5,6 +5,8 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Restday from "./pages/Restday";
+import Training from "./pages/Training";
 
 // components
 import Footer from "./Footer";
@@ -41,6 +43,14 @@ function App() {
               <Route
                 path="/plan"
                 element={!user ? <Navigate to="/login" /> : <Plan />}
+              />
+              <Route
+                path="/restday"
+                element={!user ? <Navigate to="/login" /> : <Restday />}
+              />
+              <Route
+                path="/training"
+                element={!user ? <Navigate to="/login" /> : <Training />}
               />
             </Routes>
           </main>
