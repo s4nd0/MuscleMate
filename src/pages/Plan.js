@@ -1,60 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 // styles
 import "./Plan.css";
-import PlanDayTemplate from "../components/PlanDayTemplate";
+import PlanDayView from "../components/PlanDayView";
+
+// firebase imports
+import { db } from "../firebase/config";
+import { collection, getDocs } from "firebase/firestore";
 
 const Plan = () => {
-  const plan = [
-    {
-      id: 0,
-      name: "Chest and Tricep",
-      exercises: ["Chest Press", "Dumbbell Press", "Cable Crossover"],
-      sets: [3, 3, 4],
-      reps: [8, 10, 8],
-    },
-    {
-      id: 1,
-      name: "Rest Day",
-    },
-    {
-      id: 2,
-      name: "Bicep and Back",
-      exercises: ["Hammer Curl", "Pull Up", "Bicep Curl"],
-      sets: [4, 3, 3],
-      reps: [10, 12, 8],
-    },
-    {
-      id: 3,
-      name: "Rest Day",
-    },
-    {
-      id: 4,
-      name: "Legs and Shoulders",
-      exercises: [
-        "Lateral raises",
-        "Face Pulls",
-        "Barbel Squat",
-        "Hip Thrusts",
-      ],
-      sets: [3, 3, 3, 4],
-      reps: [12, 12, 10, 8],
-    },
-    {
-      id: 5,
-      name: "Rest Day",
-    },
-    {
-      id: 6,
-      name: "Rest Day",
-    },
-  ];
+  const [plan, setPlan] = useState(null);
+
+  const { user } = useAuthContext();
+
+  useEffect(() => {
+    const ref = collection(db, "plans");
+    getDocs(ref).then((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        if (doc.data().uid === user.uid) setPlan({ id: doc.id, ...doc.data() });
+      });
+    });
+  }, [user.uid]);
 
   return (
     <>
-      {plan.map((item) => (
-        <PlanDayTemplate item={item} key={item.id} />
-      ))}
+      {plan &&
+        plan.plan.map((item) => <PlanDayView item={item} key={item.id} />)}
     </>
   );
 };

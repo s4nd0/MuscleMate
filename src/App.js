@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Restday from "./pages/Restday";
 import Training from "./pages/Training";
+import Create from "./pages/Create";
 
 // components
 import Footer from "./Footer";
@@ -51,6 +52,10 @@ function App() {
               <Route
                 path="/training"
                 element={!user ? <Navigate to="/login" /> : <Training />}
+              />
+              <Route
+                path="/create"
+                element={!user ? <Navigate to="/login" /> : <Create />}
               />
             </Routes>
           </main>

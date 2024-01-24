@@ -59,7 +59,7 @@ a.link:hover {
 
 main {
   box-sizing: border-box;
-  margin: 86px auto 0;
+  margin: 0 auto 0;
   padding: 0;
   flex: 1;
   width: 100%;
@@ -80,6 +80,11 @@ main {
   cursor: pointer;
   transition: 0.1s ease-in-out;
 }
+.disabled {
+  background-color: #ffb13c;
+  color: #666;
+  cursor: not-allowed;
+}
 .btn.active {
   background-color: #553505 !important;
   cursor: not-allowed;
@@ -99,7 +104,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
   width: 100%;
   box-sizing: border-box;
 }
@@ -182,4 +186,10 @@ form label input {
 }
 .m-y20 {
   margin-top: 20px;
+}
+.dark-bg {
+  background-color: var(--primary);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }

@@ -1,0 +1,39 @@
+.create {
+  font-family: "Oswald", sans-serif;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.create .form-create {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 10px 20px 0;
+}
+.create .form-create > * {
+  margin-bottom: 10px;
+}
+.create .form-create label {
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+.create .form-create input {
+  box-sizing: border-box;
+  width: 100%;
+}
+.create-planView-container {
+  display: flex;
+  flex-direction: row;
+  padding: 0 20px;
+}
+.create-planView-container > div {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+}
+.create-planView > p {
+  padding-bottom: 10px;
+}
