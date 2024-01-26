@@ -26,9 +26,6 @@
   padding: 0;
   list-style-type: none;
 }
-.planWindow-btn {
-  margin: 20px;
-}
 .planWindow-content-names {
   list-style-type: decimal !important;
   padding-left: 20px !important;

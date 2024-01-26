@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import Restday from "./pages/Restday";
 import Training from "./pages/Training";
 import Create from "./pages/Create";
+import Records from "./pages/Records";
 
 // components
 import Footer from "./Footer";
@@ -24,7 +25,7 @@ function App() {
   return (
     <div className="App">
       {authIsReady && (
-        <BrowserRouter>
+        <BrowserRouter scrollRestoration="auto">
           <Header />
           <main>
             <Routes>
@@ -56,6 +57,10 @@ function App() {
               <Route
                 path="/create"
                 element={!user ? <Navigate to="/login" /> : <Create />}
+              />
+              <Route
+                path="/records"
+                element={!user ? <Navigate to="/login" /> : <Records />}
               />
             </Routes>
           </main>

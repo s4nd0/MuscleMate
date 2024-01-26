@@ -1,31 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useAuthContext } from "../hooks/useAuthContext";
+import React, { useState } from "react";
 
 // components
 import PlanWindow from "../components/PlanWindow";
 import { Link } from "react-router-dom";
 
-// firebase imports
-import { db } from "../firebase/config";
-import { collection, getDocs } from "firebase/firestore";
+// hooks
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useCollection } from "../hooks/useCollection";
 
 const Home = () => {
-  const [plan, setPlan] = useState(null);
-  const [isPending, setIsPending] = useState(true);
-
   const { user } = useAuthContext();
 
-  useEffect(() => {
-    const ref = collection(db, "plans");
-    getDocs(ref).then((snapshot) => {
-      snapshot.docs.forEach((doc) => {
-        if (doc.data().uid === user.uid) {
-          setPlan({ id: doc.id, ...doc.data() });
-        }
-        setIsPending(false);
-      });
-    });
-  }, [user.uid]);
+  const { document: plan, isPending } = useCollection("plans", [
+    "uid",
+    "==",
+    user.uid,
+  ]);
 
   return (
     <>
@@ -35,12 +25,13 @@ const Home = () => {
           {!plan && (
             <div className="PlanWindow">
               <div className="planWindow-header">
-                <p>Create your training plan!</p>
+                <p>It looks like you don't have a plan...</p>
               </div>
-
-              <Link className="planWindow-btn btn" to="/create">
-                Create
-              </Link>
+              <div className="dark-bg">
+                <Link className="btn" to="/create">
+                  Create your plan!
+                </Link>
+              </div>
             </div>
           )}
         </div>

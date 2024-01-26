@@ -10,47 +10,41 @@ const PlanWindow = ({ data }) => {
   const { plan } = data;
   const { user } = useAuthContext();
   const day = new Date().getDay() - 1;
-  const week = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-  const today = week[day];
 
   return (
     <div className="PlanWindow">
-      {plan[day].name !== "Rest Day" && (
-        <>
-          <div className="planWindow-header today">
-            <p>
-              Hello, {user.displayName}! Today's workout is {plan[day].name}
-            </p>
-          </div>
-          <div className="dark-bg">
-            <Link to="/training" className="btn">
-              Start training!
-            </Link>
-          </div>
-        </>
-      )}
+      <div className="planWindow-header today">
+        <p>
+          {plan[day].name !== "Rest Day"
+            ? `Hello, ${user.displayName}! Today's workout is ${plan[day].name}`
+            : `Hello, ${user.displayName}! You are resting today`}
+        </p>
+      </div>
+      <div className="dark-bg">
+        {plan[day].name !== "Rest Day" && (
+          <Link to="/training" className="btn">
+            Start training!
+          </Link>
+        )}
+        {plan[day].name === "Rest Day" && (
+          <Link to="/restday" className="btn">
+            More about rest day
+          </Link>
+        )}
+      </div>
 
       <PlanDayView item={plan[day]} />
-      {plan[day].name !== "Rest Day" && (
-        <div className="dark-bg">
-          <Link to="/plan" className="btn">
-            View full plan
-          </Link>
-        </div>
-      )}
-      {plan[day].name === "Rest Day" && (
-        <Link to="/restday" className="planWindow-btn btn">
-          More about rest day
+      <div className="dark-bg">
+        <Link to="/plan" className="btn">
+          View full plan
         </Link>
-      )}
+      </div>
+
+      <div className="dark-bg">
+        <Link to="/records" className="btn">
+          Check your training records
+        </Link>
+      </div>
     </div>
   );
 };

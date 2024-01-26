@@ -1,18 +1,32 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import Creatable from "react-select/creatable";
+import { useNavigate } from "react-router-dom";
+
+// components
+import PlanDayView from "../components/PlanDayView";
+
+// hooks
+import { useCollection } from "../hooks/useCollection";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 // firebase imports
 import { db } from "../firebase/config";
-import { collection, addDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 
 // styles
 import "./Create.css";
 import "../components/PlanWindow.css";
-import PlanDayView from "../components/PlanDayView";
 
 const Create = () => {
+  const [disabled, setDisabled] = useState(false);
+  const [anyChange, setAnyChange] = useState(false);
   const [day, setDay] = useState("");
   const [name, setName] = useState("");
   const [exercise, setExercise] = useState("");
@@ -55,6 +69,7 @@ const Create = () => {
   });
 
   const { user } = useAuthContext();
+  const navigate = useNavigate();
 
   const days = [
     { value: "0", label: "Monday" },
@@ -67,9 +82,12 @@ const Create = () => {
   ];
 
   const names = [
-    { value: "chest and tricep", label: "Chest and Tricep" },
-    { value: "back and bicep", label: "Back and Bicep" },
-    { value: "legs and shoulders", label: "Legs and shoulders" },
+    { value: "rest day", label: "Rest Day" },
+    { value: "chest and triceps", label: "Chest and Tricep" },
+    { value: "back and biceps", label: "Back and Bicep" },
+    { value: "legs and shoulders", label: "Legs and Shoulders" },
+    { value: "chest and biceps", label: "Chest and Biceps" },
+    { value: "biceps and triceps", label: "Biceps and Triceps" },
   ];
 
   const week = [
@@ -81,6 +99,29 @@ const Create = () => {
     "Saturday",
     "Sunday",
   ];
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const { document: plan, isPending } = useCollection("plans", [
+    "uid",
+    "==",
+    user.uid,
+  ]);
+
+  useEffect(() => {
+    if (plan) {
+      const data = plan.plan;
+      setMonday(data[0]);
+      setTuesday(data[1]);
+      setWednesday(data[2]);
+      setThursday(data[3]);
+      setFriday(data[4]);
+      setSaturday(data[5]);
+      setSunday(data[6]);
+    }
+  }, [plan]);
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -145,6 +186,7 @@ const Create = () => {
       };
       createObject(obj);
     }
+    setAnyChange(true);
   };
 
   const handleFinish = async () => {
@@ -158,7 +200,20 @@ const Create = () => {
       sunday,
     ];
 
+    setDisabled(true);
     await addDoc(collection(db, "plans"), { plan, uid: user.uid });
+    navigate("/");
+  };
+
+  const handleUpdate = async () => {
+    setDisabled(true);
+    const ref = doc(db, "plans", plan.id);
+    await deleteDoc(ref);
+    handleFinish();
+  };
+
+  const handleGoBack = () => {
+    navigate("/");
   };
 
   // errors handling for name and day
@@ -187,99 +242,117 @@ const Create = () => {
   }, [exercise]);
 
   return (
-    <div className="create">
-      {!error && exerciseArray.length > 0 && (
-        <>
-          <PlanDayView
-            item={{
-              id: Number(day),
-              name: name,
-              exercises: exerciseArray,
-              sets: setsArray,
-              reps: repsArray,
-              rows: row,
-            }}
-            preview={true}
-          />
-        </>
+    <>
+      {!isPending && (
+        <div className="create">
+          {!error && exerciseArray.length > 0 && (
+            <>
+              <PlanDayView
+                item={{
+                  id: Number(day),
+                  name: name,
+                  exercises: exerciseArray,
+                  sets: setsArray,
+                  reps: repsArray,
+                  rows: row,
+                }}
+                preview={true}
+              />
+            </>
+          )}
+
+          <form onSubmit={handleCreate} className="form-create">
+            <Select
+              options={days}
+              placeholder="Day of the week"
+              onChange={(choice) => setDay(choice.value)}
+              isSearchable={false}
+            />
+            <Creatable
+              isClearable
+              options={names}
+              placeholder="Choose or create your own"
+              onChange={(choice) => {
+                choice ? setName(choice.label) : setName("");
+              }}
+            />
+            {error && (
+              <button disabled className="btn disabled">
+                Fill in all fields
+              </button>
+            )}
+            {!error && (
+              <button className="btn">{`Confirm for ${week[day]}`}</button>
+            )}
+          </form>
+
+          <form onSubmit={handleAdd} className="form-create">
+            <label>
+              <input
+                type="text"
+                placeholder="exercise"
+                onChange={(e) => setExercise(e.target.value)}
+                value={exercise}
+              />
+            </label>
+            <label>
+              <input
+                type="number"
+                placeholder="sets"
+                onChange={(e) => setSets(e.target.value)}
+                value={sets}
+              />
+            </label>
+            <label>
+              <input
+                type="number"
+                placeholder="reps"
+                onChange={(e) => setReps(e.target.value)}
+                value={reps}
+              />
+            </label>
+            {!exerciseError && !error && (
+              <button className="btn">Add single exercise</button>
+            )}
+            {(exerciseError || error) && (
+              <button disabled className="btn disabled">
+                Add single exercise
+              </button>
+            )}
+          </form>
+
+          <div className="create-planView">
+            {monday && <PlanDayView item={monday} />}
+            {tuesday && <PlanDayView item={tuesday} />}
+            {wednesday && <PlanDayView item={wednesday} />}
+            {thursday && <PlanDayView item={thursday} />}
+            {friday && <PlanDayView item={friday} />}
+            {saturday && <PlanDayView item={saturday} />}
+            {sunday && <PlanDayView item={sunday} />}
+          </div>
+
+          {!disabled && (
+            <div className="dark-bg">
+              {!plan && (
+                <button className="btn" onClick={handleFinish}>
+                  Create your plan!
+                </button>
+              )}
+              {plan && anyChange && (
+                <button className="btn" onClick={handleUpdate}>
+                  Update your plan!
+                </button>
+              )}
+              {plan && !anyChange && (
+                <button className="btn" onClick={handleGoBack}>
+                  No changes. Come back!
+                </button>
+              )}
+            </div>
+          )}
+        </div>
       )}
-
-      <form onSubmit={handleCreate} className="form-create">
-        <Select
-          options={days}
-          placeholder="Day of the week"
-          onChange={(choice) => setDay(choice.value)}
-          isSearchable={false}
-        />
-        <Creatable
-          isClearable
-          options={names}
-          placeholder="Name"
-          onChange={(choice) => {
-            choice ? setName(choice.label) : setName("");
-          }}
-        />
-        {error && (
-          <button disabled className="btn disabled">
-            Fill in all fields
-          </button>
-        )}
-        {!error && (
-          <button className="btn">{`Confirm for ${week[day]}`}</button>
-        )}
-      </form>
-
-      <form onSubmit={handleAdd} className="form-create">
-        <label>
-          <input
-            type="text"
-            placeholder="exercise"
-            onChange={(e) => setExercise(e.target.value)}
-            value={exercise}
-          />
-        </label>
-        <label>
-          <input
-            type="number"
-            placeholder="sets"
-            onChange={(e) => setSets(e.target.value)}
-            value={sets}
-          />
-        </label>
-        <label>
-          <input
-            type="number"
-            placeholder="reps"
-            onChange={(e) => setReps(e.target.value)}
-            value={reps}
-          />
-        </label>
-        {!exerciseError && !error && (
-          <button className="btn">Add single exercise</button>
-        )}
-        {(exerciseError || error) && (
-          <button disabled className="btn disabled">
-            Add single exercise
-          </button>
-        )}
-      </form>
-
-      <div className="create-planView">
-        {monday && <PlanDayView item={monday} />}
-        {tuesday && <PlanDayView item={tuesday} />}
-        {wednesday && <PlanDayView item={wednesday} />}
-        {thursday && <PlanDayView item={thursday} />}
-        {friday && <PlanDayView item={friday} />}
-        {saturday && <PlanDayView item={saturday} />}
-        {sunday && <PlanDayView item={sunday} />}
-      </div>
-
-      <div className="dark-bg">
-        <button className="btn" onClick={handleFinish}>
-          Create your plan!
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
 
