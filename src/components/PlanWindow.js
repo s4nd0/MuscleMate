@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PlanDayView from "./PlanDayView";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -9,7 +9,8 @@ import "./PlanWindow.css";
 const PlanWindow = ({ data }) => {
   const { plan } = data;
   const { user } = useAuthContext();
-  const day = new Date().getDay() - 1;
+
+  const day = new Date().getDay() - 1 < 0 ? 6 : new Date().getDay() - 1;
 
   return (
     <div className="PlanWindow">

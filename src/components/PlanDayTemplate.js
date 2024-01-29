@@ -5,7 +5,7 @@ import "./PlanWindow.css";
 import { Link } from "react-router-dom";
 
 const PlanDayTemplate = ({ item }) => {
-  const day = new Date().getDay() - 1;
+  const day = new Date().getDay() - 1 < 0 ? 6 : new Date().getDay() - 1;
   const week = [
     "Monday",
     "Tuesday",

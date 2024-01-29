@@ -12,13 +12,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 
 // firebase imports
 import { db } from "../firebase/config";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  deleteDoc,
-} from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc } from "firebase/firestore";
 
 // styles
 import "./Create.css";

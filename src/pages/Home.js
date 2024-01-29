@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 // components
 import PlanWindow from "../components/PlanWindow";
