@@ -2,7 +2,8 @@ import React from "react";
 
 // components
 import PlanWindow from "../components/PlanWindow";
-import { Link } from "react-router-dom";
+import PlanTitle from "../components/PlanTitle";
+import RouteButton from "../components/RouteButton";
 
 // hooks
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -24,14 +25,8 @@ const Home = () => {
           {plan && <PlanWindow data={plan} />}
           {!plan && (
             <div className="PlanWindow">
-              <div className="planWindow-header">
-                <p>It looks like you don't have a plan...</p>
-              </div>
-              <div className="dark-bg">
-                <Link className="btn" to="/create">
-                  Create your plan!
-                </Link>
-              </div>
+              <PlanTitle p1={`It looks like you don't have a plan...`} />
+              <RouteButton route={"/create"} text={"Create your plan!"} />
             </div>
           )}
         </div>

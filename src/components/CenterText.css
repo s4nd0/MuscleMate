@@ -1,0 +1,19 @@
+.center-text {
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+}
+.center-text > p {
+  box-sizing: border-box;
+  text-align: center;
+  width: 100%;
+  padding: 40px;
+  font-size: 32px;
+}
+.center-text > img {
+  filter: invert(100%);
+  width: 40%;
+}

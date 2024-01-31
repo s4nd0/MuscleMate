@@ -6,7 +6,7 @@ import "./ConfirmModal.css";
 const ConfirmModal = ({
   isModalOpen,
   setIsModalOpen,
-  handleDelete,
+  logic,
   question,
   yes,
   no,
@@ -29,7 +29,7 @@ const ConfirmModal = ({
         <p>{question}</p>
         <div className="modal-button-line">
           {yes && (
-            <button onClick={handleDelete} className="btn delete">
+            <button onClick={logic} className="btn delete">
               {yes}
             </button>
           )}

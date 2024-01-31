@@ -1,0 +1,11 @@
+.exercise-expand {
+  padding: 10px 0;
+  background-color: #333;
+}
+.exercise-expand ul {
+  list-style-type: decimal;
+  margin: 0;
+}
+.exercise-expand ul li {
+  margin: 8px 0;
+}

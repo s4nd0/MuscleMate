@@ -1,0 +1,13 @@
+.rating-parent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.rating-container img {
+  width: 32px;
+  filter: invert(100%);
+  cursor: pointer;
+}

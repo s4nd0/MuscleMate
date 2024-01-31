@@ -27,6 +27,9 @@ p {
   margin: 0;
   padding: 0;
 }
+p::first-letter {
+  text-transform: capitalize;
+}
 
 a {
   color: #333;
@@ -43,6 +46,9 @@ a.link:hover {
 .white-text {
   color: #fff;
 }
+.secondary-text {
+  color: var(--secondary);
+}
 .title {
   text-align: center;
   text-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5);
@@ -58,6 +64,7 @@ a.link:hover {
 }
 
 main {
+  background-color: #222;
   box-sizing: border-box;
   margin: 0 auto 0;
   padding: 0;
@@ -192,6 +199,9 @@ form label input {
 }
 .m-y20 {
   margin-top: 20px;
+}
+.pd-20 {
+  padding: 20px;
 }
 .dark-bg {
   background-color: var(--primary);

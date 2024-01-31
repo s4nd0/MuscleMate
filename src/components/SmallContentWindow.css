@@ -1,0 +1,24 @@
+.small-content-window {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
+.small-content-window > div {
+  font-weight: 700;
+  border-radius: 16px;
+  padding: 10px;
+}
+.small-content-window > div p {
+  display: inline-block;
+}
+.small-content-window > div.secondary {
+  background-color: var(--secondary);
+  color: #000;
+}
+.small-content-window > div.green {
+  background-color: #299100;
+}
+.small-content-window > div.purple {
+  background-color: #630091;
+  color: #fff;
+}

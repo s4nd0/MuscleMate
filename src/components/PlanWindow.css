@@ -1,4 +1,5 @@
 .PlanWindow {
+  color: white;
   font-family: "Oswald", sans-serif;
   font-size: 18px;
   display: flex;
@@ -11,7 +12,7 @@
   background-color: var(--primary);
   color: var(--secondary);
   box-sizing: border-box;
-  padding: 10px;
+  padding: 16px 10px;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -21,22 +22,35 @@
   color: rgb(0, 165, 0);
   font-size: 20px;
 }
-.planWindow-content ul {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
+.planWindow-header img {
+  transition: 0.2s ease-in-out;
+  width: 24px;
 }
-.planWindow-content-names {
-  list-style-type: decimal !important;
-  padding-left: 20px !important;
+.planWindow-header.reverse img {
+  transform: rotateZ(180deg);
 }
+.planWindow-content {
+  background-color: #2b2b2b;
+  color: #eee;
+}
+.planWindow-content.opened {
+  padding: 10px;
+}
+
 .planWindow-content-row {
   box-sizing: border-box;
   padding: 5px 20px;
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;
-  border-bottom: 2px solid var(--primary);
+  column-gap: 8px;
+}
+.planWindow-content-row p {
+  text-align: right;
+}
+.planWindow-content-row p:first-child {
+  text-align: left;
 }
 .planWindow-content-row:last-child {
   border: none;
+  padding-bottom: 20px;
 }

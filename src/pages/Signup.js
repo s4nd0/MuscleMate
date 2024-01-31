@@ -42,22 +42,6 @@ const Signup = () => {
 
   return (
     <div className="signup">
-      <p className="title">
-        If you want change in your life, you've come to the right place
-      </p>
-      <img
-        src="https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="woman lifting barbell"
-      />
-      <p className="title">
-        We will take care of your discipline and help you manage your training
-        plan
-      </p>
-      <img
-        src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="dumbbells"
-      />
-      <p className="title">Join us!</p>
       <form onSubmit={handleSubmit}>
         <label>
           <span>
@@ -100,11 +84,6 @@ const Signup = () => {
         )}
         {signupError && <p className="error">{signupError}</p>}
       </form>
-      <h2>
-        By joining our application, you will gain access to creating and
-        managing your training plan, viewing individually tailored statistics
-        about your progress and much more!
-      </h2>
     </div>
   );
 };

@@ -94,10 +94,6 @@ const Create = () => {
     "Sunday",
   ];
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const { document: plan, isPending } = useCollection("plans", [
     "uid",
     "==",
@@ -209,6 +205,11 @@ const Create = () => {
   const handleGoBack = () => {
     navigate("/");
   };
+
+  // scroll on top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // errors handling for name and day
   useEffect(() => {

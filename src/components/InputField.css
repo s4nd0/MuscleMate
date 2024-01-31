@@ -1,0 +1,31 @@
+.input-field {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 30% 30%;
+  margin: 0;
+  padding: 0 20px;
+  align-items: center;
+  justify-items: center;
+}
+.input-field label {
+  padding: 0;
+  display: block;
+  box-sizing: border-box;
+}
+.input-field label input {
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 18px;
+  padding: 4px;
+}
+.input-field button {
+  border-radius: 8px;
+  font-size: 18px;
+  outline: none;
+  border: 2px solid #000;
+  background-color: var(--secondary);
+  padding: 4px;
+}
+.input-field button:hover {
+  cursor: pointer;
+}

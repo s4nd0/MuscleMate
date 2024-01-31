@@ -3,6 +3,10 @@ import React from "react";
 // styles
 import "./PlanWindow.css";
 
+// components
+import PlanTitle from "./PlanTitle";
+import DisplaySinglePlan from "./DisplaySinglePlan";
+
 const PlanDayView = ({ item, preview }) => {
   const week = [
     "Monday",
@@ -17,35 +21,11 @@ const PlanDayView = ({ item, preview }) => {
   return (
     <>
       <div className="PlanWindow">
-        <div className="planWindow-header">
-          <p>
-            {week[item.id]}
-            {preview && " (preview)"}
-          </p>
-          <p>{item.name}</p>
-        </div>
-        {item.rows && (
-          <>
-            <div className="planWindow-content-row">
-              <b>
-                <p>Exercise</p>
-              </b>
-              <b>
-                <p>Sets</p>
-              </b>
-              <b>
-                <p>Reps</p>
-              </b>
-            </div>
-            {item.rows.map((row) => (
-              <div key={row.exercise} className="planWindow-content-row">
-                <p>{row.exercise}</p>
-                <p>{row.sets !== "" ? row.sets : "-"}</p>
-                <p>{row.reps !== "" ? row.reps : "-"}</p>
-              </div>
-            ))}
-          </>
-        )}
+        <PlanTitle
+          p1={!preview ? week[item.id] : `${week[item.id]} (preview)`}
+          p2={item.name}
+        />
+        {item.rows && <DisplaySinglePlan item={item} />}
       </div>
     </>
   );

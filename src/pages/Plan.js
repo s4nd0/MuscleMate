@@ -11,6 +11,7 @@ import { useCollection } from "../hooks/useCollection";
 // components
 import ConfirmModal from "../components/ConfirmModal";
 import PlanDayView from "../components/PlanDayView";
+import Button from "../components/Button";
 
 // firebase imports
 import { db } from "../firebase/config";
@@ -47,22 +48,17 @@ const Plan = () => {
             <PlanDayView item={item} key={item.id} />
           ))}
 
-          <div className="dark-bg">
-            <button onClick={handleUpdate} className="btn">
-              Edit plan
-            </button>
-          </div>
-
-          <div className="dark-bg">
-            <button onClick={handleClick} className="btn delete">
-              DELETE PLAN
-            </button>
-          </div>
+          <Button onClick={handleUpdate} text={"Edit plan"} />
+          <Button
+            onClick={handleClick}
+            text={"DELETE PLAN"}
+            addClass={"delete"}
+          />
 
           <ConfirmModal
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
-            handleDelete={handleDelete}
+            logic={handleDelete}
             question={
               "Are you sure you want to delete your training plan? It will no longer be possible to recover it!"
             }

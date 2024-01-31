@@ -1,0 +1,9 @@
+.lineText {
+  margin-left: 10px;
+}
+.lineText.white {
+  color: #fff;
+}
+.lineText.secondary {
+  color: var(--secondary);
+}

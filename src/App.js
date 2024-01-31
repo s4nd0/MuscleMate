@@ -1,4 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+
+// hooks
 import { useAuthContext } from "./hooks/useAuthContext";
 
 // pages
@@ -9,6 +11,9 @@ import Restday from "./pages/Restday";
 import Training from "./pages/Training";
 import Create from "./pages/Create";
 import Records from "./pages/Records";
+import TrainingDetails from "./pages/TrainingDetails";
+import About from "./pages/About";
+import Plan from "./pages/Plan";
 
 // components
 import Footer from "./Footer";
@@ -16,8 +21,6 @@ import Header from "./Header";
 
 // styles
 import "./App.css";
-import About from "./pages/About";
-import Plan from "./pages/Plan";
 
 function App() {
   const { user, authIsReady } = useAuthContext();
@@ -53,6 +56,10 @@ function App() {
               <Route
                 path="/training"
                 element={!user ? <Navigate to="/login" /> : <Training />}
+              />
+              <Route
+                path="/training/:id"
+                element={!user ? <Navigate to="/login" /> : <TrainingDetails />}
               />
               <Route
                 path="/create"
