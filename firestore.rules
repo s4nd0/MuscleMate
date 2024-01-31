@@ -3,11 +3,22 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /plans/{document=**} {
-      // only authenticated user can create
+      // only logged user can create
       allow create: if request.auth != null;
 
       // only logged user can delete and read their own plan
       allow read, delete: if request.auth.uid == resource.data.uid;
+    }
+    match /data/{document=**} {
+    	// only logged user can read the data
+      allow read: if request.auth.uid != null;
+    }
+    match /trainings/{document=**} {
+    	// only logged user can create
+      allow create: if request.auth != null;
+      
+      // only logged user can read, write and delete their own training record
+      allow read, delete, update: if request.auth.uid == resource.data.uid;
     }
   }
 }

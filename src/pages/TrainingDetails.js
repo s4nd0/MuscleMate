@@ -43,7 +43,6 @@ const TrainingDetails = () => {
   ];
 
   const handleFinish = () => {
-    console.log("finished. Rate: ", rate);
     update({ rate: rate, finished: true });
   };
 
