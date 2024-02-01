@@ -13,12 +13,12 @@ const ExpendableExercise = ({ exercise, sets, reps }) => {
       <PlanTitle p1={`${exercise}`} />
       <div className="expendable-exercise-content">
         <SmallContentWindow
-          text={sets !== "" ? "Sets: " : "No sets given"}
+          text={sets !== "" ? "Sets" : "No sets given"}
           value={sets !== "" ? sets : ""}
           color={"secondary"}
         />
         <SmallContentWindow
-          text={reps !== "" ? "Reps: " : "To failure"}
+          text={reps !== "" ? "Reps" : "To failure"}
           value={reps !== "" ? reps : ""}
           color={"purple"}
         />

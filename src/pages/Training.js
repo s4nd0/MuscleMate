@@ -45,6 +45,8 @@ const Training = () => {
       uid: user.uid,
       time: time,
       finished: false,
+      note: "",
+      trainingPlan: plan.plan[day],
     });
     navigate(`/training/${newDoc.id}`);
   };
@@ -71,7 +73,7 @@ const Training = () => {
                 onClick={handleContinue}
                 text={
                   training.finished
-                    ? `You've already finished this training! Click to see it!`
+                    ? `You've already finished training today! Click to see it!`
                     : `Continue your training!`
                 }
               />

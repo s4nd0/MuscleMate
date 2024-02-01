@@ -4,12 +4,16 @@
   margin: 10px;
 }
 .small-content-window > div {
+  box-shadow: 0 3px 10px #5555554b;
   font-weight: 700;
   border-radius: 16px;
   padding: 10px;
 }
 .small-content-window > div p {
   display: inline-block;
+}
+.small-content-window > div p:first-child {
+  margin-right: 4px;
 }
 .small-content-window > div.secondary {
   background-color: var(--secondary);

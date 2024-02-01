@@ -1,0 +1,12 @@
+.note-field textarea {
+  font-family: "Chakra Petch", sans-serif;
+  resize: none;
+  padding: 10px;
+  border-radius: 16px;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1.5;
+  background-color: #333;
+  outline: none;
+  box-shadow: 0 3px 10px #5555554b;
+}

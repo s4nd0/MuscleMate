@@ -7,8 +7,8 @@ const SmallContentWindow = ({ text, value, color }) => {
   return (
     <div className={`small-content-window`}>
       <div className={`${color}`}>
-        {text && <p>{text}</p>}
         {value && <p>{value}</p>}
+        {text && <p>{text}</p>}
       </div>
     </div>
   );

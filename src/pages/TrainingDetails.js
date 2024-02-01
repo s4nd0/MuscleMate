@@ -18,19 +18,14 @@ import ExpendableExercise from "../components/ExpendableExercise";
 import PlanTitle from "../components/PlanTitle";
 import Button from "../components/Button";
 import Rating from "../components/Rating";
+import NoteField from "../components/NoteField";
 
 const TrainingDetails = () => {
   const [rate, setRate] = useState(3);
+  const [note, setNote] = useState("");
   const [day, setDay] = useState(0);
-  const { user } = useAuthContext();
   const { id } = useParams();
   const { document, error, isPending, update } = useDocument("trainings", id);
-
-  const { document: plan, isPending: planIsPending } = useCollection("plans", [
-    "uid",
-    "==",
-    user.uid,
-  ]);
 
   const week = [
     "Monday",
@@ -43,7 +38,7 @@ const TrainingDetails = () => {
   ];
 
   const handleFinish = () => {
-    update({ rate: rate, finished: true });
+    update({ rate: rate, finished: true, note: note });
   };
 
   useEffect(() => {
@@ -56,7 +51,7 @@ const TrainingDetails = () => {
 
   return (
     <div className="training-details">
-      {error && <CenterText text={error} src={EmojiSad} alt={"sad emoji"} />}
+      {error && <CenterText value={error} src={EmojiSad} alt={"sad emoji"} />}
       {!error && !isPending && (
         <PlanTitle
           p1={`${week[day]}`}
@@ -66,9 +61,8 @@ const TrainingDetails = () => {
       )}
       {!isPending &&
         !error &&
-        !planIsPending &&
-        plan &&
-        plan.plan[day].rows.map((exercise) => (
+        document.trainingPlan.rows &&
+        document.trainingPlan.rows.map((exercise) => (
           <ExpendableExercise
             key={exercise.exercise}
             exercise={exercise.exercise}
@@ -76,13 +70,27 @@ const TrainingDetails = () => {
             reps={exercise.reps}
           />
         ))}
-      {plan && document && (
+      {document && (
         <>
           {document.finished === false && (
-            <Rating finished={false} setRate={setRate} rate={rate} />
+            <>
+              <NoteField
+                setNote={setNote}
+                note={note}
+                placeholder="Write a note about your training.."
+              />
+              <Rating finished={false} setRate={setRate} rate={rate} />
+            </>
           )}
           {document.finished === true && (
-            <Rating finished={true} rate={document.rate} />
+            <>
+              <NoteField
+                finished={true}
+                note={document.note}
+                placeholder="No notes..."
+              />
+              <Rating finished={true} rate={document.rate} />
+            </>
           )}
           {document.finished === false && (
             <Button
