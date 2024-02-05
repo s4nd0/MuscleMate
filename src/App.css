@@ -46,6 +46,12 @@ a.link:hover {
 .white-text {
   color: #fff;
 }
+.red-text {
+  color: rgb(200, 0, 0);
+}
+.green-text {
+  color: rgb(0, 165, 0);
+}
 .secondary-text {
   color: var(--secondary);
 }

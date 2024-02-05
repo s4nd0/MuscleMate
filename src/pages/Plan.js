@@ -16,6 +16,7 @@ import Button from "../components/Button";
 // firebase imports
 import { db } from "../firebase/config";
 import { doc, deleteDoc } from "firebase/firestore";
+import CenterText from "../components/CenterText";
 
 const Plan = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,7 +24,11 @@ const Plan = () => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
 
-  const { document: plan } = useCollection("plans", ["uid", "==", user.uid]);
+  const {
+    document: plan,
+    error,
+    isPending,
+  } = useCollection("plans", ["uid", "==", user.uid]);
 
   const handleClick = () => {
     setIsModalOpen(true);
@@ -42,6 +47,7 @@ const Plan = () => {
 
   return (
     <>
+      {isPending && <CenterText value={"Loading..."} />}
       {plan && (
         <div>
           {plan.plan.map((item) => (
@@ -67,6 +73,7 @@ const Plan = () => {
           />
         </div>
       )}
+      {error && <CenterText value={error} />}
     </>
   );
 };

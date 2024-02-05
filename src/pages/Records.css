@@ -1,0 +1,36 @@
+.records {
+  color: #fff;
+}
+.records-header {
+  margin: 0 auto;
+  max-width: 300px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.records-header p {
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 16px;
+}
+.turned-on {
+  color: var(--secondary);
+  background-color: #444;
+}
+.turned-off {
+  color: #8b8b8b;
+  text-decoration: line-through;
+}
+.records-header > img {
+  transition: 0.1s ease-in-out;
+  width: 64px;
+  filter: invert(70%);
+}
+.records-header > img:hover {
+  cursor: pointer;
+}
+.records-header .reversed {
+  transform: rotateY(180deg);
+}

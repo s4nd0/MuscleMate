@@ -47,6 +47,7 @@ const Training = () => {
       finished: false,
       note: "",
       trainingPlan: plan.plan[day],
+      rate: 3,
     });
     navigate(`/training/${newDoc.id}`);
   };
@@ -89,6 +90,7 @@ const Training = () => {
           )}
         </div>
       )}
+      {(isPending || trainingIsPending) && <CenterText value="loading..." />}
     </>
   );
 };

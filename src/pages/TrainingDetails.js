@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // styles
 import "./TrainingDetails.css";
 
 // hooks
-import { useCollection } from "../hooks/useCollection";
-import { useAuthContext } from "../hooks/useAuthContext";
 import { useDocument } from "../hooks/useDocument";
 
 // images
@@ -19,6 +17,7 @@ import PlanTitle from "../components/PlanTitle";
 import Button from "../components/Button";
 import Rating from "../components/Rating";
 import NoteField from "../components/NoteField";
+import { doc } from "firebase/firestore";
 
 const TrainingDetails = () => {
   const [rate, setRate] = useState(3);
@@ -26,6 +25,8 @@ const TrainingDetails = () => {
   const [day, setDay] = useState(0);
   const { id } = useParams();
   const { document, error, isPending, update } = useDocument("trainings", id);
+
+  const navigate = useNavigate();
 
   const week = [
     "Monday",
@@ -39,6 +40,7 @@ const TrainingDetails = () => {
 
   const handleFinish = () => {
     update({ rate: rate, finished: true, note: note });
+    navigate("/records");
   };
 
   useEffect(() => {
@@ -46,6 +48,8 @@ const TrainingDetails = () => {
       const timestampDay = new Date(document.time.seconds * 1000).getDay();
       const day = timestampDay - 1 < 0 ? 6 : timestampDay - 1;
       setDay(day);
+      setNote(document.note);
+      setRate(document.rate);
     }
   }, [document]);
 
@@ -70,35 +74,16 @@ const TrainingDetails = () => {
             reps={exercise.reps}
           />
         ))}
+      {isPending && <CenterText value="loading..." />}
       {document && (
         <>
-          {document.finished === false && (
-            <>
-              <NoteField
-                setNote={setNote}
-                note={note}
-                placeholder="Write a note about your training.."
-              />
-              <Rating finished={false} setRate={setRate} rate={rate} />
-            </>
-          )}
-          {document.finished === true && (
-            <>
-              <NoteField
-                finished={true}
-                note={document.note}
-                placeholder="No notes..."
-              />
-              <Rating finished={true} rate={document.rate} />
-            </>
-          )}
-          {document.finished === false && (
-            <Button
-              onClick={handleFinish}
-              text={"Finish training"}
-              disabled={rate ? false : true}
-            />
-          )}
+          <NoteField
+            setNote={setNote}
+            note={note}
+            placeholder="Write a note about your training.."
+          />
+          <Rating setRate={setRate} rate={rate} />
+          <Button onClick={handleFinish} text={"Finish training"} />
         </>
       )}
     </div>

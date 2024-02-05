@@ -4,6 +4,7 @@ import React from "react";
 import PlanWindow from "../components/PlanWindow";
 import PlanTitle from "../components/PlanTitle";
 import RouteButton from "../components/RouteButton";
+import CenterText from "../components/CenterText";
 
 // hooks
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -31,6 +32,7 @@ const Home = () => {
           )}
         </div>
       )}
+      {isPending && <CenterText value="loading..." />}
     </>
   );
 };

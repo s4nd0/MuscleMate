@@ -8,7 +8,7 @@ import Star from "../images/star.svg";
 import StarFilled from "../images/starFilled.svg";
 import LineText from "./LineText";
 
-const Rating = ({ finished, setRate, rate }) => {
+const Rating = ({ finished = false, setRate, rate }) => {
   const [star1, setStar1] = useState(Star);
   const [star2, setStar2] = useState(Star);
   const [star3, setStar3] = useState(Star);

@@ -1,0 +1,24 @@
+.single-record {
+  color: #fff;
+  margin: 10px;
+  border: 2px solid #333;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.single-record-header {
+  padding: 10px;
+  border-bottom: 2px solid #333;
+}
+.single-record-header-name {
+  color: var(--secondary);
+}
+.single-record-header-date,
+.single-record-header-finished {
+  font-size: 14px;
+  color: #999;
+}
+
+.single-record-note {
+  padding: 10px;
+  border-bottom: 2px solid #333;
+}

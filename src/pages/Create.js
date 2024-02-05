@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 // components
 import PlanDayView from "../components/PlanDayView";
+import CenterText from "../components/CenterText";
 
 // hooks
 import { useCollection } from "../hooks/useCollection";
@@ -238,6 +239,7 @@ const Create = () => {
 
   return (
     <>
+      {isPending && <CenterText value={"Loading..."} />}
       {!isPending && (
         <div className="create">
           {!error && exerciseArray.length > 0 && (
