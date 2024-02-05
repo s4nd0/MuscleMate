@@ -61,7 +61,9 @@ const SingleRecord = ({ item }) => {
   return (
     <div className="single-record">
       <div className="single-record-header">
-        <p className="single-record-header-name">{item.trainingPlan.name}</p>
+        <p className="single-record-header-name">
+          {item.trainingPlan ? item.trainingPlan.name : "Training name"}
+        </p>
         <p className="single-record-header-date">{date}</p>
         <p className="single-record-header-finished">
           Finished:{" "}

@@ -17,7 +17,6 @@ import PlanTitle from "../components/PlanTitle";
 import Button from "../components/Button";
 import Rating from "../components/Rating";
 import NoteField from "../components/NoteField";
-import { doc } from "firebase/firestore";
 
 const TrainingDetails = () => {
   const [rate, setRate] = useState(3);
@@ -65,6 +64,7 @@ const TrainingDetails = () => {
       )}
       {!isPending &&
         !error &&
+        document.trainingPlan &&
         document.trainingPlan.rows &&
         document.trainingPlan.rows.map((exercise) => (
           <ExpendableExercise
