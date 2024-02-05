@@ -42,6 +42,7 @@ const Signup = () => {
 
   return (
     <div className="signup">
+      <h2>Sign up to MuscleMate</h2>
       <form onSubmit={handleSubmit}>
         <label>
           <span>

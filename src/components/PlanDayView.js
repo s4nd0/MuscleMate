@@ -20,7 +20,7 @@ const PlanDayView = ({ item, preview }) => {
 
   return (
     <>
-      <div className="PlanWindow">
+      <div className="PlanWindow PlanWindow-Line">
         <PlanTitle
           p1={!preview ? week[item.id] : `${week[item.id]} (preview)`}
           p2={item.name}

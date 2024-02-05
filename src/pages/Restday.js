@@ -16,7 +16,7 @@ const Restday = () => {
   } = useCollection("data", ["name", "==", "restday"]);
 
   return (
-    <div className="planWindow">
+    <div className="PlanWindow">
       {isPending && <CenterText value={"Loading..."} />}
       {plan &&
         !isPending &&

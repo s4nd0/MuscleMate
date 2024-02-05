@@ -4,9 +4,14 @@
   font-size: 18px;
   display: flex;
   flex-direction: column;
-  border-bottom: 2px solid #333;
   box-sizing: border-box;
   overflow: hidden;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.PlanWindow-Line {
+  border-bottom: 3px solid #333;
 }
 .planWindow-header {
   background-color: var(--primary);
@@ -33,6 +38,9 @@
   background-color: #2b2b2b;
   color: #eee;
 }
+.planWindow-header.reverse {
+  background-color: #333;
+}
 .planWindow-content.opened {
   padding: 10px;
 }
@@ -53,4 +61,12 @@
 .planWindow-content-row:last-child {
   border: none;
   padding-bottom: 20px;
+}
+.expendable-text {
+  cursor: pointer;
+}
+@media screen and (min-width: 670px) {
+  .PlanWindow {
+    font-size: 24px;
+  }
 }

@@ -18,6 +18,7 @@ const Login = () => {
 
   return (
     <div className="login">
+      <h2>Log in to MuscleMate</h2>
       <form onSubmit={handleSubmit}>
         <label>
           <span>Email</span>

@@ -1,4 +1,6 @@
 .training {
   color: #fff;
   font-family: "Oswald", sans-serif;
+  margin: 0 auto;
+  max-width: 600px;
 }

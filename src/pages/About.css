@@ -1,0 +1,14 @@
+.about {
+  color: #fff;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 600px;
+}
+.about h3 {
+  color: var(--secondary);
+  margin: 10px 0;
+  line-height: 1.3;
+}
+.about a {
+  color: #fff;
+}

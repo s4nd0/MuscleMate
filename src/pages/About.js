@@ -12,21 +12,29 @@ const About = () => {
       <h3>
         MuscleMate is my first individual project using React and Firebase.
       </h3>
+
+      <h3>A MuscleMate application:</h3>
+      <ul>
+        <li>efficiently organize and optimize workout plans</li>
+        <li>helps users achieve their fitness goals</li>
+        <li>
+          provides a user-friendly interface to create, track, and adjust
+          training routines
+        </li>
+        <li>
+          ensuring users can maintain consistency and effectiveness in their
+          workouts
+        </li>
+      </ul>
       <a
         className="link"
         href="https://github.com/s4nd0/MuscleMate"
         target="_blank"
         rel="noreferrer"
       >
-        Link to the GitHub repository
+        Click to go to the GitHub repository
       </a>
-      <h3>
-        A <big>MuscleMate</big> application is designed to efficiently organize
-        and optimize workout plans, helping users achieve their fitness goals.
-        The application provides a user-friendly interface to create, track, and
-        adjust training routines, ensuring users can maintain consistency and
-        effectiveness in their workouts.
-      </h3>
+
       {!user && (
         <h3>
           Create an account to learn all the secrets of the application and take
